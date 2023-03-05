@@ -1,12 +1,12 @@
 <?php
 $submitPressed = filter_input(INPUT_POST, 'btnSubmit');
-if (isset($submitPressed)) {
+if (isset($submitPressed)){
   $name = filter_input(INPUT_POST, 'txtName');
-  $link = mysqli_connect('localhost', 'root', 'jaeger12', 'pwl2022', '3306')
-    or die(mysqli_connect_error());
+  $link = mysqli_connect('localhost', 'root', 'jaeger12', 'PWL01', '3306')
+  or die(mysqli_connect_error());
   mysqli_autocommit($link, false);
-  $query = "INSERT INTO book(name) VALUES(?)";
-  if ($stmt = mysqli_prepare($link, $query)) {
+  $query = "INSERT INTO genre(name) VALUES(?)";
+  if ($stmt = mysqli_prepare($link,$query)){
     mysqli_stmt_bind_param($stmt, $name);
     mysqli_stmt_execute($stmt) or die(mysqli_error($link));
     mysqli_commit($link);
@@ -15,6 +15,9 @@ if (isset($submitPressed)) {
   mysqli_close($link);
 }
 ?>
+
+
+
 <form action="" method="post">
   <div>
     <label for="catId">Name</label>
@@ -29,16 +32,14 @@ if (isset($submitPressed)) {
       <th>name</th>
       <th>author</th>
       <th>publisher</th>
-      <th>publish_year</th>
-      <th>short_description</th>
-      <th>cover</th>
-      <th>genre</th>
+      <th>ID</th>
+      <th>Name</th>
     </tr>
   </thead>
   <tbody>
     <?php
-    $link = mysqli_connect('localhost', 'root', 'jaeger12', 'pwl2022', '3306') or die(mysqli_connect_error());
-    $query = "SELECT isbn, title , author, publisher , publish_year, short_description, cover, genre_id FROM book ";
+    $link = mysqli_connect('localhost', 'root', 'jaeger12', 'PWL01', '3306') or die(mysqli_connect_error());
+    $query = "SELECT_isbn, name FROM book";
     if ($result = mysqli_query($link, $query) or die(mysqli_error($link)));
     while ($row = mysqli_fetch_array($result)) {
       echo '<tr>';
@@ -46,10 +47,10 @@ if (isset($submitPressed)) {
       echo '<td>' . $row['title'] . '</td>';
       echo '<td>' . $row['author'] . '</td>';
       echo '<td>' . $row['publisher'] . '</td>';
-      echo '<td>' . $row['publish_year'] . '</td>';
+      echo '<td>' . $row['publisher_year'] . '</td>';
       echo '<td>' . $row['short_description'] . '</td>';
       echo '<td>' . $row['cover'] . '</td>';
-      echo '<td>' . $row['genre_id'] . '</td>';
+      echo '<td>' . $row['genre'] . '</td>';
       echo '</tr>';
     }
     ?>

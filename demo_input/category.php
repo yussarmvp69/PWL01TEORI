@@ -1,12 +1,12 @@
 <?php
 $submitPressed = filter_input(INPUT_POST, 'btnSubmit');
-if (isset($submitPressed)) {
+if (isset($submitPressed)){
   $name = filter_input(INPUT_POST, 'txtName');
-  $link = mysqli_connect('localhost', 'root', 'jaeger12', 'pwl2022', '3306')
-    or die(mysqli_connect_error());
+  $link = mysqli_connect('localhost', 'root', 'jaeger12', 'PWL01', '3306')
+  or die(mysqli_connect_error());
   mysqli_autocommit($link, false);
   $query = "INSERT INTO genre(name) VALUES(?)";
-  if ($stmt = mysqli_prepare($link, $query)) {
+  if ($stmt = mysqli_prepare($link,$query)){
     mysqli_stmt_bind_param($stmt, $name);
     mysqli_stmt_execute($stmt) or die(mysqli_error($link));
     mysqli_commit($link);
@@ -15,6 +15,8 @@ if (isset($submitPressed)) {
   mysqli_close($link);
 }
 ?>
+
+
 
 <form action="" method="post">
   <div>
@@ -32,8 +34,8 @@ if (isset($submitPressed)) {
   </thead>
   <tbody>
     <?php
-    $link = mysqli_connect('localhost', 'root', 'jaeger12', 'pwl2022', '3306') or die(mysqli_connect_error());
-    $query = "SELECT id, name FROM genre";
+    $link = mysqli_connect('localhost', 'root', 'jaeger12', 'PWL01', '3306') or die(mysqli_connect_error());
+    $query = "SELECT_id, name FROM genre";
     if ($result = mysqli_query($link, $query) or die(mysqli_error($link)));
     while ($row = mysqli_fetch_array($result)) {
       echo '<tr>';
