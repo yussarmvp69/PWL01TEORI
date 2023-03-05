@@ -15,14 +15,16 @@ if (isset($submitPressed)) {
   mysqli_close($link);
 }
 ?>
-<form action="" method="post">
-  <div>
-    <label for="catId">Name</label>
-    <input type="text" class="form-control" id="catId" name="txtName">
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex" method="post">
+    <label>Name</label>
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Submit</button>
+    </form>
   </div>
-  <input name="btnSubmit" type="submit" class="btn btn-default">
-</form>
-<table class="display" id="myTable">
+</nav>
+<table class="table" id="myTable">
   <thead>
     <tr>
       <th>isbn</th>
